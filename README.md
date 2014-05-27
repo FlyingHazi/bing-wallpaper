@@ -7,7 +7,7 @@ A script which downloads the latest picture of the day from Bing.com and saves
 it to a directory.
 
 The script was tested on:
-    Mac OS X 10.8.2 and 10.8.3
+    Mac OS X 10.8.5
 
 How to use?
 -----------
@@ -29,13 +29,6 @@ to **$HOME/Library/LaunchAgents** and loaded with the command
 Modify the plist as needed to point to **HazisBingDesktop.sh**. For more
 information on configuring launchd [see here](
 http://blog.ideasftw.com/2013/02/run-script-from-launchd-instead-of-cron.html).
-
-* Another option on Mac (and arguably a little simpler) is to set the Calendar
-app to run the **Tools/Bing Wallpaper.app** [at a recurring daily time](
-http://blog.ideasftw.com/2013/03/use-mac-calendar-and-automator-to-run.html).
-Modify the app (from within Automator) as it needs to point to
-**HazisBingDesktop.sh** and the correct **PICTURE_DIR**.
-
 
 Acknowledgement
 ---------------
