@@ -1,3 +1,4 @@
+#!/bin/bash
 # $bing is needed to form the fully qualified URL for
 # the Bing pic of the day
 bing="www.bing.com"
@@ -23,7 +24,7 @@ mkdir -p $saveDir
 
 # The desired Bing picture resolution to download
 # Valid options: "_1024x768" "_1280x720" "_1366x768" "_1920x1200"
-# It is pitty that the 1920x1200 has a watermark
+# It is a pity that the 1920x1200 picture has a watermark
 desiredPicRes="_1920x1080"
 
 # The file extension for the Bing pic
@@ -52,6 +53,8 @@ do
     echo $picName $exitCode >> $logFile
     if [ 0 == $exitCode ]
     then
+    # Set as wallpaper
+        osascript -e "set fp to \"$saveDir$picName\"" -e 'set fp to POSIX file fp as string' -e 'tell Application "Finder"' -e 'set the desktop picture to fp as alias' -e 'end tell'
         break
     fi
 done
