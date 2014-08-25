@@ -23,7 +23,8 @@ logFile=$saveDir"log.txt"
 mkdir -p $saveDir
 
 # The desired Bing picture resolution to download
-# Valid options: "_1024x768" "_1280x720" "_1366x768" "_1920x1080" "_1920x1200"
+# Valid options: "_1024x768" "_1280x720" "_1366x768" "_1920x1200"
+# It is a pity that the 1920x1200 picture has a watermark
 desiredPicRes="_1920x1080"
 
 # The file extension for the Bing pic
@@ -34,6 +35,8 @@ for i in 1 2 3 4 5
 do
     # Wait for the network
     sleep 5
+    # wget PATH
+    wgetPath=/opt/local/bin
     # Form the URL for the desired pic resolution
     desiredPicURL=$bing$(echo $(curl -s $xmlURL) | grep -o "<urlBase>.*</urlBase>" | cut -d ">" -f 2 | cut -d "<" -f 1)$desiredPicRes$picExt
 
@@ -48,7 +51,7 @@ do
         continue
     fi
     # Download the Bing pic of the day at desired resolution
-    wget -t 0 -T 5 -c -O $saveDir$picName $desiredPicURL
+    $wgetPath/wget -t 0 -T 5 -c -O $saveDir$picName $desiredPicURL
     exitCode=$?
     echo $picName $exitCode >> $logFile
     if [ 0 == $exitCode ]
