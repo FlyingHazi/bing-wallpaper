@@ -30,13 +30,14 @@ desiredPicRes="_1920x1080"
 # The file extension for the Bing pic
 picExt=".jpg"
 
+# wget PATH
+wgetPath=/opt/local/bin
+
 date >> $logFile
 for i in 1 2 3 4 5
 do
     # Wait for the network
     sleep 5
-    # wget PATH
-    wgetPath=/opt/local/bin
     # Form the URL for the desired pic resolution
     desiredPicURL=$bing$(echo $(curl -s $xmlURL) | grep -o "<urlBase>.*</urlBase>" | cut -d ">" -f 2 | cut -d "<" -f 1)$desiredPicRes$picExt
 
