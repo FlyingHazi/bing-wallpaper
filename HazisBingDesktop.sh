@@ -30,10 +30,8 @@ desiredPicRes="_1920x1080"
 # The file extension for the Bing pic
 picExt=".jpg"
 
-# wget PATH
-wgetPath=/opt/local/bin
-
 date >> $logFile
+pwd >> $logFile
 for i in 1 2 3 4 5
 do
     # Wait for the network
@@ -52,13 +50,15 @@ do
         continue
     fi
     # Download the Bing pic of the day at desired resolution
-    $wgetPath/wget -t 0 -T 5 -c -O $saveDir$picName $desiredPicURL
+    wget -t 0 -T 5 -c -O $saveDir$picName $desiredPicURL
     exitCode=$?
     echo $picName $exitCode >> $logFile
     if [ 0 == $exitCode ]
     then
         # Set as wallpaper
-        osascript -e "set fp to \"$saveDir$picName\"" -e 'set fp to POSIX file fp as string' -e 'tell Application "Finder"' -e 'set the desktop picture to fp as alias' -e 'end tell'
+	bash setWallPaper.sh $saveDir$picName
+    	exitCode=$?
+	echo "setWallPaper" $exitCode >> $logFile
         break
     fi
 done

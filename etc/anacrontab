@@ -1,0 +1,6 @@
+# /etc/anacrontab example
+# See the anacrontab(5) manpage
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+# format: period delay job-identifier command
+1       1       marcos.anacron.daily	run-parts	$HOME/etc/anacron.daily
